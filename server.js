@@ -1,6 +1,6 @@
 var express = require("express");
 var mongoose = require("mongoose");
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nytScraper";
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
@@ -25,17 +25,17 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/nytScraper", { useNewUrlParser: true });
 
 // Routes
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
-  axios.get("http://www.echojs.com/").then(function(response) {
+  axios.get("http://www.nytimes.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
+    // console.log(response);
     var $ = cheerio.load(response.data);
-
     // Now, we grab every h2 within an article tag, and do the following:
     $("article h2").each(function(i, element) {
       // Save an empty result object
@@ -43,10 +43,9 @@ app.get("/scrape", function(req, res) {
 
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this)
-        .children("a")
         .text();
       result.link = $(this)
-        .children("a")
+        .closest("a")
         .attr("href");
 
       // Create a new Article using the `result` object built from scraping
