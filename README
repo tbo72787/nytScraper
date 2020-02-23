@@ -1,0 +1,28 @@
+# nytScraper ![language](https://img.shields.io/badge/language-javascript-blue.svg)
+
+> NYT Scraper lets you see all the articles on &quot;nytimes.com&quot;, view them on the site, and leave notes on them.
+
+## :books: Table of Contents
+
+- [Installation](#package-installation)
+- [Usage](#rocket-usage)
+- [Support](#hammer_and_wrench-support)
+- [Contributing](#memo-contributing)
+- [License](#scroll-license)
+
+## :rocket: Usage
+
+```
+```
+
+## :hammer_and_wrench: Support
+
+Please [open an issue](https://github.com/tbo72787/nytScraper/issues/new) for support.
+
+## :memo: Contributing
+
+Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/tbo72787/nytScraper/compare/).
+
+## :scroll: License
+
+[MIT](LICENSE) © [tbo72787](https://github.com/tbo72787)
