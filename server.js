@@ -29,7 +29,7 @@ mongoose.connect("mongodb://localhost/nytScraper", { useNewUrlParser: true });
 
 // Routes
 
-// A GET route for scraping the echoJS website
+// A GET route for scraping the nytimes website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
   axios.get("http://www.nytimes.com/").then(function(response) {
@@ -47,7 +47,7 @@ app.get("/scrape", function(req, res) {
       result.link = $(this)
         .closest("a")
         .attr("href");
-
+      
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
         .then(function(dbArticle) {
@@ -58,6 +58,7 @@ app.get("/scrape", function(req, res) {
           // If an error occurred, log it
           console.log(err);
         });
+      // });
     });
 
     // Send a message to the client
