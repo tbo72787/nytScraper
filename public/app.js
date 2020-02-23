@@ -4,12 +4,26 @@ $.getJSON("/articles", function(data) {
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
     $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+    // Button to leave a note
+    $("#articles").append("<button data-id='" + data[i]._id + "' id='leaveNote'>Leave Note</button>");
+    // Sees if link is complete, and displays button with complete link
+    if(data[i].link.includes("https://www.nytimes.com")) {
+      $("#articles").append("<button data-id='" + data[i]._id + "' ><a href= '"
+      + data[i].link + "'>View Article</a></button>");
+    }
+    else {
+      $("#articles").append("<button data-id='" + data[i]._id + "' ><a href= 'https://www.nytimes.com"
+      + data[i].link + "'>View Article</a></button>");
+    }
+    $("#articles").append("<button data-id='" + data[i]._id + "' ><a href= '/notes/" + data[i]._id + 
+    "'>View Notes</a></button>");
+
   }
 });
 
 
 // Whenever someone clicks a p tag
-$(document).on("click", "p", function() {
+$(document).on("click", "#leaveNote", function() {
   // Empty the notes from the note section
   $("#notes").empty();
   // Save the id from the p tag

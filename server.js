@@ -79,6 +79,21 @@ app.get("/articles", function(req, res) {
       res.json(err);
     });
 });
+// Route for getting all Articles from the db
+app.get("/notes/:id", function(req, res) {
+  // Grab every document in the Notes collection that matches the id
+  db.Article.find({ "_id": req.params.id })
+    .then(function(res) {
+      // If we were able to successfully find Notes, send them back to the client
+      console.log(res);
+      let notes = res[0].data.note;
+      res.json(notes);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
